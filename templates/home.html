@@ -1,10 +1,59 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Tour Guide</title>
+        <link rel="stylesheet" href="{%  static 'style.css'%}">
+
 </head>
 <body>
-<h1>Peli Projekti</h1>
+<div class="header">
+  <h1>Guide Tour</h1>
+</div>
+
+
+<div class="positioned">
+    
+    <button type="button" class="btn btn-primary btn-lg">Start game</button>
+    
+    <button type="button" class="btn btn-primary btn-lg">Quit game</button>
+
+
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Points: </li>
+    <li class="list-group-item">Monuments guessed: </li>
+    <li class="list-group-item">Current location: </li>
+  </ul>
+</div>
+</div>
+
+
+<div class="cards-container">
+    <!-- Original Card -->
+    <div class="card">
+        <h4><b>Rules</b></h4>
+        <p>The player must choose a country to travel, then it must guess if the monument of photo belongs to the country he chose to travel.</p>
+        <div class="container">
+            <img src="{% static 'avion.jpg' %}" alt="Tour image">
+        </div>
+    </div>
+
+    <!-- Larger Card -->
+    <div class="card large-card">
+        <h4><b>Rules</b></h4>
+        <p>The player must choose a country to travel, then it must guess if the monument of photo belongs to the country he chose to travel.</p>
+        <div class="container">
+            <img src="{% static 'avion.jpg' %}" alt="Tour image">
+        </div>
+    </div>
+</div>
+
+</div> 
+
+
+
+
 </body>
 </html>
