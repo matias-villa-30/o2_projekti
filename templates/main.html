@@ -1,25 +1,26 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/style.css" rel="stylesheet">
-    <title>Document</title>
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+    <title>Guide Tour</title>
 </head>
 <body>
     <div class="container">
         <main>
             <header class="page-header">
                 <div class="logo">
-                    <a href="mypage2.html"><img src="QWlogo2.png" alt="logo here"></a>
+                    <a href="#"><img src="{% static 'QWlogo2.png' %}" alt="logo here"></a>
                 </div>
                 <nav>
                     <ul class="nav">
                         <li>
-                            <a href="mypage2.html">OTSIKKO</a>
+                            <a href="#">Guide Tour</a>
                         </li>
                         <li>
-                            <a href="mypage3.html">?????</a>
+                            <a href="#">?????</a>
                         </li>
                     </ul>
                 </nav>
@@ -28,7 +29,8 @@
                 <div class="part1">
                     <ul class="part1-ul">
                         <li class="rules">
-                            <p class="spec-h">RULESS</p>
+                            <p class="spec-h">RULES</p>
+                            <p>The player must choose a country to travel out of 4 randomly generated, then it will have to guess the correct information, it might be the country´s currency, official language, religion or flag for example. The player will travel to 10 different countries and will gather points according to right answers. Every right answer will give the player 5 points, and a wrong answer will deduct 3 points.</p>
                         </li>
                         <li class="map">MAP</li>
                     </ul>
@@ -36,11 +38,15 @@
                 <div class="part2">
                     <ul class="part2-ul">
                         <li class="buttons">
-                            <button class="basic-button">START</button>
-                            <button class="basic-button">QUIT</button>
+                            <button class="basic-button" onclick="startGame()">START</button>
+                            <button class="basic-button" onclick="confirm('Sure you want to quit?');">QUIT</button>
                         </li>
                         <li class="stats">
                             <p class="spec-h">STATS</p>
+                            <p class="spec-g" id="nombre">Player name: </p>
+                            <p class="spec-g">Points: </p>
+                            <p class="spec-g">Correct answers: </p>
+                            <p class="spec-g">Inorrect answers: </p>
                         </li>
                         <li class="info">
                             <p class="spec-h">INFO</p>
@@ -48,7 +54,17 @@
                     </ul>
                 </div>
                 <div class="part3">
-                    <div class="peli">PELI</div>
+                    <div class="peli"></div>
+                    <h1 id="titulo"></h1>
+    <form id="query">
+        <div id="game-container">
+    
+  </div>
+
+  <script src="{% static 'game.js'%}" defer></script>
+    <div id="results"></div>
+
+                  
                 </div>
             </div>
         </main>
