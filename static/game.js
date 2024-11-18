@@ -1,5 +1,242 @@
 'use strict';
 
+async function kysymys5(event) {
+    event.preventDefault(); // Prevent default form behavior
+
+    const titulo = document.getElementById("titulo");
+    const results = document.getElementById("results");
+    const check_box_container = document.getElementById("opciones");
+
+    // Clear previous content
+    results.innerHTML = "";
+    check_box_container.innerHTML = "";
+
+    // Fetch country data
+    const country_api = await fetch("https://restcountries.com/v3.1/all");
+    const json_country = await country_api.json();
+
+    // Filter valid countries with population and flags
+    const validCountries = json_country.filter(
+        (country) => country.population && country.flags
+    );
+
+    // Select a random country for the correct answer
+    const num_random = Math.floor(Math.random() * validCountries.length);
+    const correctCountry = validCountries[num_random];
+    const correctPopulation = correctCountry.population;
+    const correctFlag = correctCountry.flags.png;
+    const correctName = correctCountry.name.common;
+
+    // Update question title
+    titulo.innerHTML = `Guess the population of ${correctName}`;
+
+    // Display the correct country's flag
+    const img = document.createElement("img");
+    img.src = correctFlag;
+    img.alt = `${correctName} flag`;
+    results.appendChild(img);
+
+    // Generate 3 wrong options
+    const wrongPopulations = [];
+    while (wrongPopulations.length < 3) {
+        const randomIndex = Math.floor(Math.random() * validCountries.length);
+        const wrongCountry = validCountries[randomIndex];
+        const wrongPopulation = wrongCountry.population;
+
+        // Ensure unique and non-matching wrong answers
+        if (wrongPopulation !== correctPopulation && !wrongPopulations.includes(wrongPopulation)) {
+            wrongPopulations.push(wrongPopulation);
+        }
+    }
+
+    // Combine correct and wrong answers, then shuffle
+    const allOptions = [...wrongPopulations, correctPopulation];
+    allOptions.sort(() => Math.random() - 0.5); // Shuffle options
+
+    // Create checkboxes for all options
+    allOptions.forEach((option) => {
+        const label = document.createElement("label");
+        label.textContent = option.toLocaleString(); // Format the number with commas
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.value = option;
+        checkbox.name = "population";
+        checkbox.id = `checkbox-${option}`;
+
+        label.prepend(checkbox);
+        check_box_container.appendChild(label);
+        check_box_container.appendChild(document.createElement("br"));
+    });
+
+    // Add a submit button for the next step
+    const submit_place = document.getElementById("next");
+    submit_place.innerHTML = `
+        <form id="nextForm">
+            <button type="submit">Next</button>
+        </form>
+    `;
+}
+
+
+async function kysymys4(event) {
+    event.preventDefault(); // Prevent default form behavior
+
+    const titulo = document.getElementById("titulo");
+    const results = document.getElementById("results");
+    const check_box_container = document.getElementById("opciones");
+
+    // Clear previous content
+    results.innerHTML = "";
+    check_box_container.innerHTML = "";
+
+    // Fetch country data
+    const country_api = await fetch("https://restcountries.com/v3.1/all");
+    const json_country = await country_api.json();
+
+    // Filter valid countries with currencies and flags
+    const validCountries = json_country.filter(
+        (country) => country.currencies && country.flags
+    );
+
+    // Select a random country for the correct answer
+    const num_random = Math.floor(Math.random() * validCountries.length);
+    const correctCountry = validCountries[num_random];
+    const correctCurrency = Object.values(correctCountry.currencies)[0].name; // Extract currency name
+    const correctFlag = correctCountry.flags.png;
+    const correctName = correctCountry.name.common;
+
+    // Update question title
+    titulo.innerHTML = `Guess the currency of ${correctName}`;
+
+    // Display the correct country's flag
+    const img = document.createElement("img");
+    img.src = correctFlag;
+    img.alt = `${correctName} flag`;
+    results.appendChild(img);
+
+    // Generate 3 wrong options
+    const wrongCurrencies = [];
+    while (wrongCurrencies.length < 3) {
+        const randomIndex = Math.floor(Math.random() * validCountries.length);
+        const wrongCountry = validCountries[randomIndex];
+        const wrongCurrency = Object.values(wrongCountry.currencies)[0]?.name;
+
+        // Ensure unique and non-matching wrong answers
+        if (wrongCurrency && wrongCurrency !== correctCurrency && !wrongCurrencies.includes(wrongCurrency)) {
+            wrongCurrencies.push(wrongCurrency);
+        }
+    }
+
+    // Combine correct and wrong answers, then shuffle
+    const allOptions = [...wrongCurrencies, correctCurrency];
+    allOptions.sort(() => Math.random() - 0.5); // Shuffle options
+
+    // Create checkboxes for all options
+    allOptions.forEach((option) => {
+        const label = document.createElement("label");
+        label.textContent = option;
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.value = option;
+        checkbox.name = "currencies";
+        checkbox.id = `checkbox-${option.toLowerCase().replace(/\s+/g, "-")}`;
+
+        label.prepend(checkbox);
+        check_box_container.appendChild(label);
+        check_box_container.appendChild(document.createElement("br"));
+    });
+
+    // Add a submit button for the next step
+    const submit_place = document.getElementById("next");
+    submit_place.innerHTML = `
+        <form id="nextForm">
+            <button type="submit" onclick="kysymys5(event)">Next</button>
+        </form>
+    `;
+}
+
+
+async function kysymys3(event) {
+    event.preventDefault(); // Prevent default form behavior
+
+    const titulo = document.getElementById("titulo");
+    const results = document.getElementById("results");
+    const check_box_container = document.getElementById("opciones");
+
+    // Clear previous content
+    results.innerHTML = "";
+    check_box_container.innerHTML = "";
+
+    // Fetch country data
+    const country_api = await fetch("https://restcountries.com/v3.1/all");
+    const json_country = await country_api.json();
+
+    // Filter valid countries with languages and flags
+    const validCountries = json_country.filter(
+        (country) => country.languages && Object.keys(country.languages).length > 0 && country.flags
+    );
+
+    // Select a random country for the correct answer
+    const num_random = Math.floor(Math.random() * validCountries.length);
+    const correctCountry = validCountries[num_random];
+    const correctLanguages = Object.values(correctCountry.languages).join(", ");
+    const correctFlag = correctCountry.flags.png;
+    const correctName = correctCountry.name.common;
+
+    // Update question title
+    titulo.innerHTML = `Guess the language of ${correctName}`;
+
+    // Display the correct country's flag
+    const img = document.createElement("img");
+    img.src = correctFlag;
+    img.alt = `${correctName} flag`;
+    results.appendChild(img);
+
+    // Generate 3 wrong options
+    const wrongLanguages = [];
+    while (wrongLanguages.length < 3) {
+        const randomIndex = Math.floor(Math.random() * validCountries.length);
+        const wrongCountry = validCountries[randomIndex];
+        const wrongLanguage = Object.values(wrongCountry.languages).join(", ");
+
+        // Ensure unique and non-matching wrong answers
+        if (wrongLanguage !== correctLanguages && !wrongLanguages.includes(wrongLanguage)) {
+            wrongLanguages.push(wrongLanguage);
+        }
+    }
+
+    // Combine correct and wrong answers, then shuffle
+    const allOptions = [...wrongLanguages, correctLanguages];
+    allOptions.sort(() => Math.random() - 0.5); // Shuffle options
+
+    // Create checkboxes for all options
+    allOptions.forEach((option) => {
+        const label = document.createElement("label");
+        label.textContent = option;
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.value = option;
+        checkbox.name = "languages";
+        checkbox.id = `checkbox-${option.toLowerCase().replace(/\s+/g, "-")}`;
+
+        label.prepend(checkbox);
+        check_box_container.appendChild(label);
+        check_box_container.appendChild(document.createElement("br"));
+    });
+
+    // Add a submit button for the next step
+    const submit_place = document.getElementById("next");
+    submit_place.innerHTML = `
+        <form id="nextForm">
+            <button type="submit" onclick="kysymys4(event)">Next</button>
+        </form>
+    `;
+}
+
+
 async function kysymys2(event) {
     event.preventDefault(); // Prevent default form behavior
 
@@ -70,7 +307,7 @@ async function kysymys2(event) {
     const submit_answer = `
     <form id="next">
         
-        <button type="submit" onclick="">Next</button>
+        <button type="submit" onclick="kysymys3(event)">Next</button>
     </form>
   `;
     const submit_place = document.getElementById("next");
