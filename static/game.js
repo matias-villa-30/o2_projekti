@@ -1,6 +1,82 @@
 'use strict';
 
-let correct_flag = null;
+async function kysymys2(event) {
+    event.preventDefault(); // Prevent default form behavior
+
+    const titulo = document.getElementById("titulo");
+    const results = document.getElementById("results");
+    const check_box_container = document.getElementById("opciones");
+
+    // Clear previous content
+    results.innerHTML = "";
+    check_box_container.innerHTML = "";
+
+    // Fetch country data
+    const country_api = await fetch("https://restcountries.com/v3.1/all");
+    const json_country = await country_api.json();
+
+    // Filter valid countries with a capital and flag
+    const validCountries = json_country.filter(
+        (country) => country.capital && country.capital.length > 0 && country.flags
+    );
+
+    // Select a random country for the correct answer
+    const num_random = Math.floor(Math.random() * validCountries.length);
+    const correctCountry = validCountries[num_random];
+    const correctCapital = correctCountry.capital[0]; // Assume first capital is valid
+    const correctFlag = correctCountry.flags.png;
+    const correctName = correctCountry.name.common;
+
+    // Update question title
+    titulo.innerHTML = `What is the capital of ${correctName}?`;
+
+    // Display the correct country's flag
+    const img = document.createElement("img");
+    img.src = correctFlag;
+    results.appendChild(img);
+
+    // Generate 3 wrong options
+    const wrongCountries = [];
+    while (wrongCountries.length < 3) {
+        const randomIndex = Math.floor(Math.random() * validCountries.length);
+        const wrongCountry = validCountries[randomIndex];
+        const wrongCapital = wrongCountry.capital[0];
+
+        // Ensure unique and non-matching wrong answers
+        if (wrongCapital !== correctCapital && !wrongCountries.includes(wrongCapital)) {
+            wrongCountries.push(wrongCapital);
+        }
+    }
+
+    // Combine correct and wrong answers, then shuffle
+    const allOptions = [...wrongCountries, correctCapital];
+    allOptions.sort(() => Math.random() - 0.5); // Shuffle options
+
+    // Create checkboxes for all options
+    allOptions.forEach((option) => {
+        const label = document.createElement("label");
+        label.textContent = option;
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.value = option;
+        checkbox.name = "countries";
+        checkbox.id = `checkbox-${option.toLowerCase().replace(/\s+/g, "-")}`;
+
+        label.prepend(checkbox);
+        check_box_container.appendChild(label);
+        check_box_container.appendChild(document.createElement("br"));
+    });
+    const submit_answer = `
+    <form id="next">
+        
+        <button type="submit" onclick="">Next</button>
+    </form>
+  `;
+    const submit_place = document.getElementById("next");
+    submit_place.innerHTML = submit_answer;
+}
+
 
 
 function startGame() {
@@ -102,10 +178,11 @@ async function gameOn(event) {
     const submit_answer = `
     <form id="next">
         
-        <button type="submit">Next</button>
+        <button type="submit" onclick="kysymys2(event)">Next</button>
     </form>
   `;
     const submit_place = document.getElementById("next");
     submit_place.innerHTML = submit_answer;
 
 }
+
