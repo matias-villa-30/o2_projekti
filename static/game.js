@@ -59,10 +59,10 @@ async function kysymys5(event) {
         label.textContent = option.toLocaleString(); // Format the number with commas
 
         const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
+        checkbox.type = "radio";
         checkbox.value = option;
         checkbox.name = "population";
-        checkbox.id = `checkbox-${option}`;
+        checkbox.id = `radio-${option}`;
 
         label.prepend(checkbox);
         check_box_container.appendChild(label);
@@ -138,10 +138,10 @@ async function kysymys4(event) {
         label.textContent = option;
 
         const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
+        checkbox.type = "radio";
         checkbox.value = option;
         checkbox.name = "currencies";
-        checkbox.id = `checkbox-${option.toLowerCase().replace(/\s+/g, "-")}`;
+        checkbox.id = `radio-${option.toLowerCase().replace(/\s+/g, "-")}`;
 
         label.prepend(checkbox);
         check_box_container.appendChild(label);
@@ -217,10 +217,10 @@ async function kysymys3(event) {
         label.textContent = option;
 
         const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
+        checkbox.type = "radio";
         checkbox.value = option;
         checkbox.name = "languages";
-        checkbox.id = `checkbox-${option.toLowerCase().replace(/\s+/g, "-")}`;
+        checkbox.id = `radio-${option.toLowerCase().replace(/\s+/g, "-")}`;
 
         label.prepend(checkbox);
         check_box_container.appendChild(label);
@@ -296,10 +296,10 @@ async function kysymys2(event) {
         label.textContent = option;
 
         const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
+        checkbox.type = "radio";
         checkbox.value = option;
         checkbox.name = "countries";
-        checkbox.id = `checkbox-${option.toLowerCase().replace(/\s+/g, "-")}`;
+        checkbox.id = `radio-${option.toLowerCase().replace(/\s+/g, "-")}`;
 
         label.prepend(checkbox);
         check_box_container.appendChild(label);
@@ -432,10 +432,10 @@ function setupOptions(options, correctName) {
     label.textContent = countryName;
 
     const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
+    checkbox.type = "radio";
     checkbox.value = countryName;
     checkbox.name = "countries";
-    checkbox.id = `checkbox-${countryName.toLowerCase().replace(/\s+/g, "-")}`;
+    checkbox.id = `radio-${countryName.toLowerCase().replace(/\s+/g, "-")}`;
 
     label.prepend(checkbox);
     checkBoxContainer.appendChild(label);
@@ -447,6 +447,12 @@ function setupOptions(options, correctName) {
   submitPlace.innerHTML = `
     <form id="next">
       <button type="submit" onclick="kysymys2(event)">Next</button>
+    </form>
+  `;
+  const deliver_answer = document.getElementById("deliver");
+  deliver_answer.innerHTML = `
+    <form id="deliver">
+      <button type="submit" onclick="">Send Answer</button>
     </form>
   `;
 }
