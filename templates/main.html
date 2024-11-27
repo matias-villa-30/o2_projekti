@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/style.css" rel="stylesheet">
-    <title>Guide Tour</title>
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+    <title>O2 Projekti</title>
 </head>
 <body>
     <div class="container">
@@ -16,10 +17,10 @@
                 <nav>
                     <ul class="nav">
                         <li>
-                            <a href="#">Guide Tour</a>
+                            <a href="try.html">Quiz master</a>
                         </li>
                         <li>
-                            <a href="#">?????</a>
+                            <a href="#">Ohjelmisto 2 Projekti</a>
                         </li>
                     </ul>
                 </nav>
@@ -29,9 +30,26 @@
                     <ul class="part1-ul">
                         <li class="rules">
                             <p class="spec-h">RULES</p>
-                            <p>The player must choose a country to travel out of 4 randomly generated, then it will have to guess the correct information, it might be the country´s currency, official language, religion or flag for example. The player will travel to 10 different countries and will gather points according to right answers. Every right answer will give the player 5 points, and a wrong answer will deduct 3 points.</p>
+                            <br>
+                            <p class="spec-g">The player will travel to 5 random countries and must respond 5 multiple choice questions about that country.</p>
+                            <p class="spec-g"> Correct answer adds up 5 points and incorrect answer will deduct 3 points. </p>
+                            <br>
+                            <p class="spec-g">1)Guess the country flag.</p>
+                            <p class="spec-g">2)Guess the capital city.</p> 
+                            <p class="spec-g">3)Guess the language.</p> 
+                            <p class="spec-g">4)Guess the currency.</p> 
+                            <p class="spec-g">5)Guess population.</p>
+                            
+                            
                         </li>
-                        <li class="map">MAP</li>
+                         <li class="info">
+                            <p class="spec-h">Ryhmä 5</p>
+                             <br>
+                            <p class="spec-g">Michael Blas Palpa </p>
+                            <p class="spec-g">Mim Farha </p>
+                            <p class="spec-g">Artem Lukianenkov </p>
+                            <p class="spec-g">Matias Villa </p>
+                        </li>
                     </ul>
                 </div>
                 <div class="part2">
@@ -45,28 +63,29 @@
                             <p class="spec-g" id="nombre">Player name: </p>
                             <p class="spec-g">Points: </p>
                             <p class="spec-g">Correct answers: </p>
-                            <p class="spec-g">Inorrect answers: </p>
+                            <p class="spec-g">Incorrect answers: </p>
                         </li>
                         <li class="info">
                             <p class="spec-h">INFO</p>
+                            
                         </li>
                     </ul>
                 </div>
                 <div class="part3">
                     <div class="peli"></div>
                     <h1 id="titulo"></h1>
-    <form id="query">
-        <div id="game-container">
-    
-  </div>
-
-  <script src="{% static 'game.js'%}" defer></script>
-    <div id="results"></div>
-
-                  
+                    <div id="game-container"></div>
+                    <script src="{% static 'game.js'%}" defer></script>
+                    <div id="results"></div>
+                    <div id="opciones"></div>
+                    <div id="next"></div>
+                    <div id="deliver"></div>
                 </div>
             </div>
         </main>
     </div>
 </body>
 </html>
+
+
+
