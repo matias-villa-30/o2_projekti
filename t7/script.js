@@ -80,6 +80,28 @@ function generateCells() {
     leftPart.className = 'left-part';
     centralContainer.appendChild(leftPart);
 
+    const questionPart = document.createElement('div');
+    questionPart.className = 'questions';
+    leftPart.appendChild(questionPart);
+
+    const gameButtons = document.createElement('div');
+    gameButtons.className = 'game-buttons';
+    leftPart.appendChild(gameButtons);
+
+
+    const but1 = document.createElement('button');
+    but1.className = 'button';
+
+    const but2 = document.createElement('button');
+    but2.className = 'button';
+    
+    const but3 = document.createElement('button');
+    but3.className = 'button';
+
+    gameButtons.appendChild(but1);
+    gameButtons.appendChild(but2);
+    gameButtons.appendChild(but3);
+
     const rightPart = document.createElement('div');
     rightPart.className = 'right-part';
     centralContainer.appendChild(rightPart);
