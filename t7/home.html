@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+    <title>Ohjelmisto 2 Projekti</title>
+</head>
+<body>
+    <main>
+        <div class="central-container">
+            <div class="right-part"></div>
+        </div>
+    </main>
+    <script src="{%  static 'board.js' %}" defer></script>
+    <script src="{%  static 'game.js' %}" defer></script>
+    <script src="{%  static 'questions.js' %}" defer></script>
+</body>
+</html>
