@@ -88,3 +88,19 @@ main {
     width: 100%;
     height: 8%;
 }
+
+.cell.event {
+    background-color: blue;
+}
+
+.cell.start {
+    background-color: blueviolet;
+}
+
+.cell.event {
+    background-color: brown;
+}
+
+.cell.erikois-event {
+    background-color: blue;
+}
